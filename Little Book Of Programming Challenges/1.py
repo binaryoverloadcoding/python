@@ -1,11 +1,20 @@
 #Challenge 1 - William Oldham
 
-import random
+import random, sys
 
-jokes = open("jokes.txt","r")
+jokes = None
+
+try:
+	jokes = open("jokes.txt","r")
+except Exception:
+	jokes = open("jokes.txt","w")
+	jokes.close()
+	print("Put jokes in jokes.txt")
+	print("Use the format: [joke],[punchline]")
+	sys.exit(0)
 
 lines = jokes.readlines()
-pos = random.randint(0,len(lines))
+pos = random.randint(0,len(lines) - 1)
 
 jokes.close()
 
@@ -15,5 +24,5 @@ jokedata = jokeline.split(",")
 
 if len(jokedata) == 2:
     print("***** " + jokedata[0] + " *****")
-    wait = input("Press enter to see the punch line!")
+    input("Press enter to see the punch line!")
     print("***** " + jokedata[1] + " *****") 
